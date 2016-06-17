@@ -12,6 +12,10 @@ class SeguridadControlador {
 		require_once PATH_VISTAS."/Seguridad/vista.login.php";
 	}
 	
+	public function home(){
+		require_once PATH_VISTAS."/Seguridad/vista.home.php";
+	}
+	
 	/*
 	public function validationUser()
 	{
