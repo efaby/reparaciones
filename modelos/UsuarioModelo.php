@@ -10,16 +10,13 @@ class UsuarioModelo {
 	
 	private $patron = "_-_-";
 
-	/**
-	 * Obtiene Usuarios
-	 */
-	public function getUsuarioList(){
-		$model = new model();		
-		$sql = "select u.id, u.numero_identificacion, u.nombres, u.apellidos, u.email, t.nombre as tipo_usuario from usuario as u inner join tipo_usuario as t on  u.tipo_usuario_id = t.id";		
-		$result = $model->runSql($sql);
-		return $model->getRows($result);
+	public function obtenerListadoUsuarios(){
+		$model = new BaseModelo();		
+		$sql = "select u.id, u.identificacion, u.nombres, u.apellidos, u.email, t.nombre as tipo_usuario from usuario as u inner join tipo_usuario as t on  u.tipo_usuario_id = t.id";		
+		$result = $model->ejecutarSql($sql);
+		return $model->obtenerCampos($result);
 	}	
-	
+	/*
 	public function getUsuario()
 	{
 		$usuario = $_GET['id'];
@@ -70,5 +67,5 @@ class UsuarioModelo {
 		$sql = "select * from estado_civil";
 		$result = $model->runSql($sql);
 		return $model->getRows($result);
-	}
+	}*/
 }

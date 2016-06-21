@@ -94,4 +94,6 @@
 </div>
 <div class="row"></div>
 <?php include_once PATH_TEMPLATE.'/footer.php';?>             
+</body>
+</html>
                

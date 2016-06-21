@@ -17,7 +17,7 @@ body {
   font-family: 'Lato', sans-serif;
   -webkit-font-smoothing: antialiased;
   min-height: 100%;
-  background: #f1f2f7;
+  background: #ffffff;
 }
 a {
   color: #3c8dbc;
@@ -112,7 +112,7 @@ body.fixed .wrapper {
 /* Content */
 .content {
   padding: 20px 15px;
-  background: #f0f3f4;
+  background: #fff;
   overflow: auto;
 }
 /* Utility */
@@ -135,7 +135,7 @@ h6,
 /* Page Header */
 .page-header {
   margin: 10px 0 20px 0;
-  font-size: 22px;
+  font-size: 26px;
 }
 .page-header > small {
   color: #666;
@@ -2890,9 +2890,12 @@ vertical-align: top;
     --------
 */
 /* skin-black navbar */
-.skin-black .navbar {
+.skin-black  {
   background-color: #ffffff;
   border-bottom: 1px solid #eee;
+}
+.navbar{
+	background-color: #f1f2f7;
 }
 .skin-black .navbar .nav a {
   color: #333333;
@@ -4255,4 +4258,15 @@ padding: 6px 10px;
 }
 .huge {
     font-size: 40px;
+}
+
+/* Propios */
+
+.row{
+	margin-left: 0px;
+	margin-right: 0px;
+}
+
+#dataTables-example_filter .form-control {
+	width: auto;
 }

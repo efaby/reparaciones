@@ -6,3 +6,5 @@ RewriteCond %{SCRIPT_FILENAME} !-f
 
 RewriteRule ^(.*)/(.*)$ vistas/$1/index.php?action=$2 [QSA,L]
 
+RewriteCond %{ENV:REDIRECT_STATUS} 200
+RewriteRule .* - [L]

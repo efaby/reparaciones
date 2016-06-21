@@ -4,10 +4,11 @@ require_once (PATH_MODELOS . "/UsuarioModelo.php");
  * Controlador de Usuarios
  */
 class UsuarioControlador {
-	public function display() {
-		/*$model = new UsuarioModel ();
-		$datos = $model->getUsuarioList ();
-		$message = "";*/
+	
+	public function mostrar() {
+		$model = new UsuarioModelo();
+		$datos = $model->obtenerListadoUsuarios();
+		$message = "";
 		require_once PATH_VISTAS."/Usuario/vista.listado.php";
 	}
 	/*

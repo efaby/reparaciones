@@ -2,10 +2,10 @@
 define("PATH_ROOT", __DIR__);
 
 require_once(PATH_ROOT . "/recursos/configuracion/parametros.inc");
-$redirect = "display";
+$redirect = "mostrar";
 session_start();
 if(isset($_GET['action'])){
-	$redirect = $_GET['action'];
+	$redirect = ($_GET['action']!='')?$_GET['action']:"mostrar";
 	$url .= "?action=".$redirect;
 }
 

@@ -7,7 +7,7 @@ require_once(PATH_MODELOS."/SeguridadModelo.php");
  */
 class SeguridadControlador {
 
-	public function display()
+	public function mostrar()
 	{	
 		require_once PATH_VISTAS."/Seguridad/vista.login.php";
 	}

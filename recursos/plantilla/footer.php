@@ -17,5 +17,3 @@
         <!-- Director App -->
         <script src="<?php echo PATH_JS; ?>/app.js" type="text/javascript"></script>       
         
-</body>
-</html>
