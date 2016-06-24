@@ -45,7 +45,7 @@ class BaseModelo
 	
 	public function obtenerCatalogo($tabla){
 		$sql = "Select * from ".$tabla;
-		$result = $this->runSql($sql);
+		$result = $this->ejecutarSql($sql);
 		return $this->obtenerCampos($result);
 	}
 	
@@ -69,7 +69,7 @@ class BaseModelo
 			$sql = 'Update '.$tabla. ' set '.$values.' where id = '.$id;
 		}
 
-		return $this->runSql($sql,true);
+		return $this->ejecutarSql($sql,true);
 	}
 	
 	

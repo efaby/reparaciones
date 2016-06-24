@@ -1,9 +1,19 @@
-<form id="frmUsuario" method="post" action="index.php?action=saveData">
+<form id="frmUsuario" method="post" action="../guardar/">
 
-	<div class="form-group col-sm-12">
+	<div class="form-group  col-sm-6">
+		<label class="control-label">Tipo Usuario</label>
+		<select class='form-control' name="tipo_usuario_id">
+			<option value="" >Seleccione</option>
+		<?php foreach ($tipos as $dato) { ?>
+			<option value="<?php echo $dato['id'];?>"  <?php if($usuario['tipo_usuario_id']==$dato['id']):echo "selected"; endif;?>><?php echo $dato['nombre'];?></option>
+		<?php }?>
+		</select>
+
+	</div>
+	<div class="form-group col-sm-6">
 		<label class="control-label">Número de Identificación</label> <input type='text'
-			name='numero_identificacion' class='form-control'
-			value="<?php echo $usuario['numero_identificacion']; ?>">
+			name='identificacion' class='form-control'
+			value="<?php echo $usuario['identificacion']; ?>">
 
 	</div>
 	<div class="form-group col-sm-6">
@@ -19,6 +29,27 @@
 
 	</div>
 	<div class="form-group col-sm-12">
+		<label class="control-label">Dirección</label> <input type='text'
+			name='direccion' class='form-control'
+			value="<?php echo $usuario['direccion']; ?>">
+
+	</div>
+	<div class="form-group col-sm-6">
+		<label class="control-label">Teléfono</label>
+		<input type='text'
+			name='telefono' class='form-control'
+			value="<?php echo $usuario['telefono']; ?>">
+
+	</div>
+	
+	<div class="form-group  col-sm-6">
+		<label class="control-label">Celular</label>
+		<input type='text'
+			name='celular' class='form-control'
+			value="<?php echo $usuario['celular']; ?>">
+
+	</div>
+	<div class="form-group col-sm-6">
 		<label class="control-label">Email</label>
 		<input type='text'
 			name='email' class='form-control'
@@ -27,43 +58,12 @@
 	</div>
 
 	<div class="form-group col-sm-6">
-		<label class="control-label">Género</label>
-		<select class='form-control' name="genero">
-			<option value="" >Seleccione</option>
-			<option value="f"  <?php if($usuario['genero']=='f'):echo "selected"; endif;?>>Femenino</option>
-			<option value="m" <?php if($usuario['genero']=='m'):echo "selected"; endif;?>>Masculino</option>
-		</select>
+		<label class="control-label">Nombre de Usuario</label> <input type='text'
+			name='usuario' class='form-control'
+			value="<?php echo $usuario['usuario']; ?>">
 
 	</div>
-	<div class="form-group  col-sm-6">
-		<label class="control-label">Tipo Usuario</label>
-		<select class='form-control' name="tipo_usuario_id">
-			<option value="" >Seleccione</option>
-		<?php foreach ($tipos as $dato) { ?>
-			<option value="<?php echo $dato['id'];?>"  <?php if($usuario['tipo_usuario_id']==$dato['id']):echo "selected"; endif;?>><?php echo $dato['nombre'];?></option>
-		<?php }?>
-		</select>
-
-	</div>
-	<div class="form-group  col-sm-6">
-		<label class="control-label">Capacidad Especial</label>
-		<select class='form-control' name="capacidad_especial_id">
-			<option value="" >Seleccione</option>
-		<?php foreach ($capacidades as $dato) { ?>
-			<option value="<?php echo $dato['id'];?>"  <?php if($usuario['capacidad_especial_id']==$dato['id']):echo "selected"; endif;?>><?php echo $dato['nombre'];?></option>
-		<?php }?>
-		</select>
-
-	</div>
-	<div class="form-group  col-sm-6">
-		<label class="control-label">Estado Civil</label>
-		<select class='form-control' name="estado_civil_id">
-			<option value="" >Seleccione</option>
-		<?php foreach ($estados as $dato) { ?>
-			<option value="<?php echo $dato['id'];?>"  <?php if($usuario['estado_civil_id']==$dato['id']):echo "selected"; endif;?>><?php echo $dato['nombre'];?></option>
-		<?php }?>
-		</select>
-
+	
 	</div>
 	<div class="form-group col-sm-6">
 		<label class="control-label">Contraseña</label>
@@ -133,31 +133,60 @@ $(document).ready(function() {
 					}
 				}
 			},
-			genero: {
+			telefono: {
+				message: 'El Número de Teléfono no es válido',
 				validators: {
-					notEmpty: {
-						message: 'Seleccione un Género'
-					}
-				}
+							notEmpty: {
+								message: 'El Número de Teléfono no puede ser vacío.'
+							},					
+							regexp: {
+								regexp: /^(?:\+)?\d{9}$/,
+								message: 'Ingrese un Número de Teléfono válido.'
+							}
+						}
+				
 			},
-			tipo_usuario: {
+			tipo_usuario_id: {
 				validators: {
 					notEmpty: {
 						message: 'Seleccione un Tipo de Usuario'
 					}
 				}
 			},
-			capacidad: {
+			celular: {
+				message: 'El Celular de Teléfono no es válido',
+				validators: {
+							notEmpty: {
+								message: 'El Número de Celular no puede ser vacío.'
+							},					
+							regexp: {
+								regexp: /^(?:\+)?\d{10}$/,
+								message: 'Ingrese un Número de Celular válido.'
+							}
+						}
+				
+			},	
+			direccion: {
+				message: 'La Dirección no es válida',
 				validators: {
 					notEmpty: {
-						message: 'Seleccione un Capacidad Especial'
+						message: 'La Dirección no puede ser vacío.'
+					},					
+					regexp: {
+						regexp: /^[a-zA-ZáéíóúÁÉÍÓÚñÑ0-9_ ,-\.]+$/,
+						message: 'Ingrese una Dirección válido.'
 					}
 				}
 			},	
-			estado: {
+			usuario: {
+				message: 'El Usuario no es válido',
 				validators: {
 					notEmpty: {
-						message: 'Seleccione un Estado Civil'
+						message: 'El Usuario no puede ser vacío.'
+					},					
+					regexp: {
+						regexp: /^[a-zA-ZáéíóúÁÉÍÓÚñÑ0-9_ -\.]+$/,
+						message: 'Ingrese un Usuario válido.'
 					}
 				}
 			},	

@@ -12,60 +12,49 @@ class UsuarioModelo {
 
 	public function obtenerListadoUsuarios(){
 		$model = new BaseModelo();		
-		$sql = "select u.id, u.identificacion, u.nombres, u.apellidos, u.email, t.nombre as tipo_usuario from usuario as u inner join tipo_usuario as t on  u.tipo_usuario_id = t.id";		
+		$sql = "select u.id, u.identificacion, u.nombres, u.apellidos, u.email, t.nombre as tipo_usuario from usuario as u inner join tipo_usuario as t on  u.tipo_usuario_id = t.id where eliminado = 0";		
 		$result = $model->ejecutarSql($sql);
 		return $model->obtenerCampos($result);
 	}	
-	/*
-	public function getUsuario()
+	
+	public function obtenerUsuario()
 	{
 		$usuario = $_GET['id'];
-		$model =  new model();
+		$model = new BaseModelo();	
 		if($usuario > 0){
 			$sql = "select * from usuario where id = ".$usuario;
-			$result = $model->runSql($sql);
-			$resultArray = $model->getRows($result);
+			$result = $model->ejecutarSql($sql);
+			$resultArray = $model->obtenerCampos($result);
 			$resultArray = $resultArray[0];
-			
+				
 		} else {
-			$resultArray = Array ( 'id' => '' ,'numero_identificacion' => '','nombres' => '','apellidos' => '','email' => '','genero' => '','password' => '', 'tipo_usuario_id' => '0','capacidad_especial_id' => '0', 'estado_civil_id' => '0','password1' => '');	
+			$resultArray = Array ( 'id' => '' ,'identificacion' => '','nombres' => '','apellidos' => '','email' => '','direccion' => '','password' => '', 'tipo_usuario_id' => '0','telefono' => '', 'celular' => '','password1' => '');
 		}
 		$resultArray['password'] = $resultArray['password1'] = $this->patron;
 		return $resultArray;
 	}
 	
-	public function saveUsuario($usuario)
-	{		
-		$password =  md5($usuario['password']);
-		$model = new model();
-		return $model->saveData($usuario, 'usuario');	
+	public function obtenerTipoUsuario(){
+		$model = new BaseModelo();			
+		return $model->obtenerCatalogo("tipo_usuario");
+	}
+	
+	public function guardarUsuario($usuario)
+	{
+		if((($usuario['id']>0) && ($usuario['password']!=$this->patron))||($usuario['id']==0)){
+			$usuario['password'] =  md5($usuario['password']);
+		} else {
+			unset($usuario['password']);
+		}
+		$model = new BaseModelo();
+		return $model->guardarDatos($usuario, 'usuario');
+	}
+	
+	public function eliminarUsuario(){
+		$usuario = $_GET['id'];
+		$sql = "update usuario set eliminado = 1 where id = ".$usuario;
+		$model = new BaseModelo();
+		$result = $model->ejecutarSql($sql);
 	}
 
-	public function deleteUsuario(){
-		$Usuario = $_GET['id'];
-		$sql = "delete from usuario where id = ".$Usuario;
-		$model =  new model();
-		$result = $model->runSql($sql);
-	}
-	
-	public function getTipoUsuario(){
-		$model = new model();
-		$sql = "select * from tipo_usuario";
-		$result = $model->runSql($sql);
-		return $model->getRows($result);
-	}
-	
-	public function getCapacidadEspecial(){
-		$model = new model();
-		$sql = "select * from capacidad_especial";
-		$result = $model->runSql($sql);
-		return $model->getRows($result);
-	}
-	
-	public function getEstadoCivil(){
-		$model = new model();
-		$sql = "select * from estado_civil";
-		$result = $model->runSql($sql);
-		return $model->getRows($result);
-	}*/
 }

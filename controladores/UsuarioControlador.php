@@ -5,54 +5,52 @@ require_once (PATH_MODELOS . "/UsuarioModelo.php");
  */
 class UsuarioControlador {
 	
-	public function mostrar() {
+	public function listar() {
 		$model = new UsuarioModelo();
 		$datos = $model->obtenerListadoUsuarios();
 		$message = "";
 		require_once PATH_VISTAS."/Usuario/vista.listado.php";
 	}
-	/*
-	public function loadForm() {
-		$model = new UsuarioModel ();
-		$usuario = $model->getUsuario ();
-		$tipos = $model->getTipoUsuario();
-		$capacidades = $model->getCapacidadEspecial();
-		$estados = $model->getEstadoCivil();
+	
+	public function editar(){
+		$model = new UsuarioModelo();
+		$usuario = $model->obtenerUsuario();
+		$tipos = $model->obtenerTipoUsuario();
 		$message = "";
-		require_once "view.form.php";
+		require_once PATH_VISTAS."/Usuario/vista.formulario.php";
 	}
-
-	public function saveData() {
+	
+	public function guardar() {
 		$usuario ['id'] = $_POST ['id'];
-		$usuario ['numero_identificacion'] = $_POST ['numero_identificacion'];
+		$usuario ['identificacion'] = $_POST ['identificacion'];
 		$usuario ['nombres'] = $_POST ['nombres'];
 		$usuario ['apellidos'] = $_POST ['apellidos'];
-		$usuario ['genero'] = $_POST ['genero'];
+		$usuario ['direccion'] = $_POST ['direccion'];
 		$usuario ['tipo_usuario_id'] = $_POST ['tipo_usuario_id'];
-		$usuario ['capacidad_especial_id'] = $_POST ['capacidad_especial_id'];
+		$usuario ['telefono'] = $_POST ['telefono'];
 		$usuario ['password'] = $_POST ['password'];
 		$usuario ['email'] = $_POST ['email'];
-		$usuario ['estado_civil_id'] = $_POST ['estado_civil_id'];
-		
-		$model = new UsuarioModel ();
+		$usuario ['celular'] = $_POST ['celular'];	
+		$usuario ['usuario'] = $_POST ['usuario'];
+		$model = new UsuarioModelo();
 		try {
-			$datos = $model->saveUsuario ( $usuario );
+			$datos = $model->guardarUsuario( $usuario );
 			$_SESSION ['message'] = "Datos almacenados correctamente.";
 		} catch ( Exception $e ) {
 			$_SESSION ['message'] = $e->getMessage ();
 		}
-		header ( "Location: index.php" );
+		header ( "Location: ../listar/" );
 	}
 	
-	public function deleteData() {
-		$model = new UsuarioModel();
+	public function eliminar() {
+		$model = new UsuarioModelo();
 		try {
-			$datos = $model->deleteUsuario ();
+			$datos = $model->eliminarUsuario();
 			$_SESSION ['message'] = "Datos eliminados correctamente.";
 		} catch ( Exception $e ) {
 			$_SESSION ['message'] = $e->getMessage ();
 		}
-		header ( "Location: index.php" );
+		header ( "Location: ../listar/" );
 	}
-*/
+	
 }

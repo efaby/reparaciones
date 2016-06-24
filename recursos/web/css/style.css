@@ -4270,3 +4270,8 @@ padding: 6px 10px;
 #dataTables-example_filter .form-control {
 	width: auto;
 }
+
+
+.glyphicon {
+	display: none !important;
+}

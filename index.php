@@ -2,10 +2,10 @@
 define("PATH_ROOT", __DIR__);
 
 require_once(PATH_ROOT . "/recursos/configuracion/parametros.inc");
-$redirect = "mostrar";
+
 session_start();
 if(isset($_GET['action'])){
-	$redirect = ($_GET['action']!='')?$_GET['action']:"mostrar";
+	$redirect = ($_GET['action']!='')?$_GET['action']:"listar";
 	$url .= "?action=".$redirect;
 }
 
@@ -49,6 +49,7 @@ if (isset($_SESSION['SESSION_USER'])){
 
 if(!isset($app)){
 	$app = 'Seguridad';
+	$redirect = "mostrar";
 }	
 
 
