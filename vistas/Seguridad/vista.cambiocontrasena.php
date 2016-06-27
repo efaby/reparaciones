@@ -1,19 +1,21 @@
 <?php $title = "Cambiar contraseña";?>
 <?php include_once PATH_TEMPLATE.'/header.php';?>
-<div class="section">
-	<div class="content">
-		<div class="container">
-		<?php if (isset($_SESSION['message'])&& ($_SESSION['message'] != '')):?>
+<!-- Main row -->
+<div class="row">
+	<div class="col-lg-12">
+    	<h1 class="page-header">Cambiar Contraseña</h1>
+   	</div>
+</div>
+<?php if (isset($_SESSION['message'])&& ($_SESSION['message'] != '')):?>
 		<div class="alert alert-success fade in alert-dismissable">
 				<button type="button" class="close" data-dismiss="alert"
 					aria-hidden="true">&times;</button>
 								  <?php echo $_SESSION['message'];$_SESSION['message'] = ''?>
 								</div>
 		<?php endif;?>
-		
-			<div class="the-box">
+<div class="row">
 			
-	<form method="post" action="index.php?action=changePasswordData" id="frmUsuario" name="frmUsuario">
+	<form method="post" action="../cambiarContraseñaDatos/" id="frmUsuario" name="frmUsuario">
 		
 		
 		<div class="form-group col-sm-12 rows">
@@ -44,23 +46,19 @@
 		
 	</form>
 	</div>
-	</div>
-	</div>
-	</div>
 	
 	
 <?php include_once PATH_TEMPLATE.'/footer.php';?>
-<script
-	src="<?php echo PATH_CSS . '/../plugins/validator/bootstrapValidator.min.js';?>"></script>
-<script src="<?php echo PATH_CSS . '/../js/apps.js';?>"></script>
+
+<script src="<?php echo PATH_JS; ?>/bootstrapValidator.min.js"></script>
+<link href="<?php echo PATH_CSS; ?>/bootstrapValidator.min.css" rel="stylesheet">
+
 <script type="text/javascript">
 
 $(document).ready(function() {
     $('#frmUsuario').bootstrapValidator({
     	message: 'This value is not valid',
 		feedbackIcons: {
-			valid: 'glyphicon glyphicon-ok',
-			invalid: 'glyphicon glyphicon-remove',
 			validating: 'glyphicon glyphicon-refresh'
 		},
 		fields: {			
@@ -99,17 +97,7 @@ $(document).ready(function() {
 					}
 				}
 			},
-			email: {
-				message: 'El eEmail no es válido',
-				validators: {
-					notEmpty: {
-						message: 'El Email no puede ser vacío'
-					},
-					emailAddress: {
-						message: 'Ingrese un Email válido.'
-					}
-				}
-			}	
+			
 		}
 	});
 

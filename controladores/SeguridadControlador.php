@@ -12,31 +12,27 @@ class SeguridadControlador {
 		require_once PATH_VISTAS."/Seguridad/vista.login.php";
 	}
 	
-	public function home(){
+	public function inicio(){
 		require_once PATH_VISTAS."/Seguridad/vista.home.php";
 	}
 	
-	/*
-	public function validationUser()
+	
+	public function validar()
 	{
-		$model = new SecureModel();
-		$login = $model->clean($_POST['username']);
-		$password = $model->clean($_POST['password']);		
-		$result= $model->validationUser($login, $password);
+		$model = new SeguridadModelo();
+		$login = $model->limpiar($_POST['usuario']);
+		$password = $model->limpiar($_POST['contrasena']);		
+		$result= $model->validarUsuario($login, $password);
 		$response['band'] = 0;
 		if($result)
-		{
-			if($result["activo"]){
-				session_regenerate_id();
-				$result['urls'] = $model->getUrlsAccess($result["tipo_usuario_id"]);
-				$_SESSION['SESSION_USER'] = $result;
-				session_write_close();
-				$urlWeb = $this->getPrefixUrl();
-				$response['data'] = $urlWeb."views/Secure/index.php?action=welcome";
-			}else {
-				$response['data'] = 'Usuario no Activo.';
-				$response['band'] = 1;
-			}					
+		{			
+			session_regenerate_id();
+			$result['urls'] = $model->obtenerUrlAccesos($result["tipo_usuario_id"]);
+			$_SESSION['SESSION_USER'] = $result;
+			session_write_close();
+			$url = $_POST['url'];
+			$response['data'] = $url.'inicio/';			
+							
 		} else {
 				$response['data'] = 'Credenciales Inválidas.';
 				$response['band'] = 1;
@@ -45,24 +41,70 @@ class SeguridadControlador {
 		exit();				
 	}
 	
+	public function cerrarSesion(){
+		session_start();
+		unset($_SESSION["SESSION_USER"]);
+		session_destroy();
+		header("Location: ../../");
+	}
+	
+	public function cambiarContrasena(){
+		require_once "vista.cambiocontrasena.php";
+	}
+	
+	public function cambiarContraseñaDatos(){
+		$passwd["p1"] = $_POST['passwordAnterior'];
+		$passwd["p2"] = $_POST['password'];
+		$passwd["p3"] = $_POST['password1'];
+		$user = $_SESSION['SESSION_USER']['id'];
+		$message = $this->validarContrasenas($passwd,$user);
+		if($message == ''){
+			$model = new SeguridadModelo();
+			try {
+				$model->cambiarContrasena($passwd["p2"],$user);
+				$_SESSION['message'] = "Su contraseña ha sido cambiada exitosamente.";
+			}
+			catch (Exception $e){
+				$_SESSION['message'] = $e->getMessage();
+			}
+		} else {
+			$_SESSION['message'] = $message;
+		}
+	
+		header("Location: ../cambiarContrasena/");
+	}
+	
+	private function validarContrasenas($passwd,$user,$band = true){
+		$model = new SeguridadModelo();	
+		if($band){
+			if($model->verificarContrasena($passwd["p1"],$user)==0){
+				return 'La contraseña actual no coincide.';
+			}
+		}
+	
+		if ($passwd["p2"] == ''){
+			return 'Por favor ingrese un Password';
+		}
+		if ($passwd["p3"] == '') {
+			return 'Por favor ingrese nuevamente un Password';
+		}
+		if ($passwd["p2"] != $passwd["p3"]){
+			return 'Las contraseñas no coinciden';
+		}
+		return "";
+	}
+	
+	/*
 	public function welcome(){
 		require_once "view.welcome.php";
 	}
 	
-	public function changePassword(){
-		require_once "view.change.php";
-	}
 	
 	public function error403(){
 		require_once PATH_VIEWS."/Secure/view.error403.php";
 	}
 	
-	public function closeSession(){
-		session_start();
-		unset($_SESSION["SESSION_USER"]);
-		session_destroy();
-		header("Location: ../../index.php");
-	}
+	
 	
 	public function displayList()
 	{
@@ -87,48 +129,8 @@ class SeguridadControlador {
 	}
 	
 		
-	public function changePasswordData(){
-		$passwd["p1"] = $_POST['passwordAnterior'];
-		$passwd["p2"] = $_POST['password'];
-		$passwd["p3"] = $_POST['password1'];
-		$user = $_SESSION['SESSION_USER']['id'];
-		$message = $this->validate($passwd,$user);		
-		if($message == ''){
-			$model = new SecureModel();
-			try {
-				$model->changePassword($passwd["p2"],$user);
-				$_SESSION['message'] = "Su contraseña ha sido cambiada exitosamente.";
-			}
-			catch (Exception $e){
-				$_SESSION['message'] = $e->getMessage();
-			}
-		} else {
-			$_SESSION['message'] = $message;
-		}
-		
-		header("Location: index.php?action=changePassword");
-	}
 	
-	private function validate($passwd,$user,$band = true){
-		$model = new SecureModel();
-		
-		if($band){
-			if($model->verifyPass($passwd["p1"],$user)==0){
-				return 'La contraseña actual no coincide.';
-			}
-		}
-		
-		if ($passwd["p2"] == ''){
-			return 'Por favor ingrese un Password';
-		}
-		if ($passwd["p3"] == '') {
-			return 'Por favor ingrese nuevamente un Password';
-		}
-		if ($passwd["p2"] != $passwd["p3"]){
-			return 'Las contraseñas no coinciden';
-		}
-		return "";
-	}
+
 	
 	public function recoverPassword(){
 		require_once "view.recoverPassword.php";

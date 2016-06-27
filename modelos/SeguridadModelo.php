@@ -8,7 +8,7 @@ require_once(PATH_MODELOS."/BaseModelo.php");
  */
 class SeguridadModelo {
 
-	public function clean($str){
+	public function limpiar($str){
 		$str = @trim($str);
 		if(get_magic_quotes_gpc())
 		{
@@ -17,17 +17,43 @@ class SeguridadModelo {
 		return addslashes($str);
 	}
 	
-	public function validationUser($login, $password){
-		$model = new model();
-		$sql = "select id, nombres, apellidos, tipo_usuario_id, activo
+	public function validarUsuario($login, $password){
+		$model = new BaseModelo();
+		$sql = "select id, nombres, apellidos, tipo_usuario_id, genero, usuario
 				from usuario
-				where username= '".$login."' and password = '".md5($password)."'";
+				where usuario= '".$login."' and password = '".md5($password)."' and eliminado = 0";
 		
-		$result = $model->runSql($sql);
-		$result = $model->getRows($result);
+		$result = $model->ejecutarSql($sql);
+		$result = $model->obtenerCampos($result);
 		return (count($result)>0)?$result[0]:0;		
 	}
 	
+	public function obtenerUrlAccesos($type){
+		$model =  new BaseModelo();
+		$sql = "select url from acceso where tipo_usuario_id = ".$type;
+		$result = $model->ejecutarSql($sql);
+		$resultArray = array();
+		while ($row = mysql_fetch_assoc($result)){
+			$resultArray[] = $row['path'];
+		}
+		return $resultArray;
+	}
+	
+	public function verificarContrasena($pass, $user){
+		$model =  new BaseModelo();
+		$sql = "select id from usuario where id = ".$user." and password = md5('".$pass."')";
+		$result = $model->ejecutarSql($sql);
+		$resultArray = $model->obtenerCampos($result);
+		return count($resultArray);
+	}
+	
+	public function cambiarContrasena($passwd,$user){
+		$sql = "update usuario set password = md5('".$passwd."') where id = ".$user;
+		$model =  new BaseModelo();
+		$result = $model->ejecutarSql($sql);
+	}
+	
+	/*	
 	public function getUsersList($offset, $limit){
 		$model = new model();
 		$offset = (($offset - 1) * $limit);
@@ -86,17 +112,7 @@ class SeguridadModelo {
 		$result = $model->runSql($sql);
 	}
 	
-	public function getUrlsAccess($type){
-		$model =  new model();
-		$sql = "select path from access where user_type_id = ".$type;
-		$result = $model->runSql($sql);		
-		$resultArray = array();
-		while ($row = mysql_fetch_assoc($result))
-		{
-			$resultArray[] = $row['path'];
-		}
-		return $resultArray;
-	}
+	
 	
 	public function editActive(){
 		$user = $_GET['id'];
@@ -106,19 +122,9 @@ class SeguridadModelo {
 		$result = $model->runSql($sql);
 	}
 	
-	public function verifyPass($pass, $user){
-		$model =  new model();
-		$sql = "select id from usuario where id = ".$user." and password = md5('".$pass."')";
-		$result = $model->runSql($sql);
-		$resultArray = $model->getRows($result);
-		return count($resultArray);
-	}
 	
-	public function changePassword($passwd,$user){
-		$sql = "update usuario set password = md5('".$passwd."') where id = ".$user;
-		$model =  new model();
-		$result = $model->runSql($sql);
-	}
+	
+	
 	
 	public function getEmailByCI($user){
 		$model =  new model();
@@ -130,7 +136,7 @@ class SeguridadModelo {
 		}
 		return null;
 	}
-	
+	*/
 	
 	
 }

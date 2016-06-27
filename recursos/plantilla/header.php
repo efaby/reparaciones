@@ -40,15 +40,15 @@
                         <li class="dropdown user user-menu">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                 <i class="fa fa-user"></i>
-                                <span>Jane Doe <i class="caret"></i></span>
+                                <span><?php echo $_SESSION['SESSION_USER']['usuario']?><i class="caret"></i></span>
                             </a>
                             <ul class="dropdown-menu dropdown-custom dropdown-menu-right">
-                                <li class="dropdown-header text-center">Account</li>
+                                <li class="dropdown-header text-center">Cuenta</li>
 
                                   <li>
-                                        <a href="#">
-                                        <i class="fa fa-user fa-fw pull-right"></i>
-                                            Profile
+                                        <a href="../../Seguridad/cambiarContrasena/">
+                                        <i class="fa fa-lock fa-fw pull-right"></i>
+                                            Cambio Contraseña
                                         </a>
                                         
                                         </li>
@@ -56,7 +56,7 @@
                                         <li class="divider"></li>
 
                                         <li>
-                                            <a href="#"><i class="fa fa-ban fa-fw pull-right"></i> Logout</a>
+                                            <a href="../../Seguridad/cerrarSesion/"><i class="fa fa-sign-out fa-fw pull-right"></i> Cerrar Sesión</a>
                                         </li>
                                     </ul>
                                 </li>
@@ -72,37 +72,50 @@
                             <!-- Sidebar user panel -->
                             <div class="user-panel">
                                 <div class="pull-left image">
-                                    <img src="<?php echo PATH_IMAGES; ?>/avatar.png" class="img-circle" alt="User Image" />
+                                    <img src="<?php echo PATH_IMAGES; ?>/avatar_<?php echo $_SESSION['SESSION_USER']['genero']?>.png" class="img-circle" alt="User Image" />
                                 </div>
                                 <div class="pull-left info">
-                                    <p>Hello, Jane</p>
+                                    <p>Hola, <?php echo $_SESSION['SESSION_USER']['nombres']?></p>
 
                                     <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
                                 </div>
                             </div>
                             
                             <!-- sidebar menu: : style can be found in sidebar.less -->
+                            <?php $url = $_SERVER["REQUEST_URI"];?>
+                            
                             <ul class="sidebar-menu">
-                                <li class="active">
-                                    <a href="index.html">
-                                        <i class="fa fa-dashboard"></i> <span>Dashboard</span>
+                            <li class="<?php echo (strpos($url, '/Seguridad/inicio/'))?'active':'';?>">
+                                    <a href="../../Seguridad/inicio/">
+                                        <i class="fa fa-dashboard"></i> <span>Inicio</span>
                                     </a>
                                 </li>
-                                <li>
-                                    <a href="general.html">
-                                        <i class="fa fa-gavel"></i> <span>General</span>
+                                <li class="<?php echo (strpos($url, '/Usuario/listar/'))?'active':'';?>">
+                                    <a href="../../Usuario/listar/">
+                                        <i class="fa fa-user"></i> <span>Usuarios</span>
+                                    </a>
+                                </li>
+                                
+                                <li class="<?php echo (strpos($url, '/Cliente/listar/'))?'active':'';?>">
+                                    <a href="../../Cliente/listar/">
+                                        <i class="fa fa-users"></i> <span>Clientes</span>
                                     </a>
                                 </li>
 
-                                <li>
+                                <li class="<?php echo (strpos($url, '/Resparacion/listar/'))?'active':'';?>">
                                     <a href="basic_form.html">
-                                        <i class="fa fa-globe"></i> <span>Basic Elements</span>
+                                        <i class="fa fa-list-ul"></i> <span>Reparaciones</span>
                                     </a>
                                 </li>
 
-                                <li>
+                                <li class="<?php echo (strpos($url, '/Reparacion/listar/'))?'active':'';?>">
                                     <a href="simple.html">
-                                        <i class="fa fa-glass"></i> <span>Simple tables</span>
+                                        <i class="fa fa-wrench"></i> <span>Mis reparaciones</span>
+                                    </a>
+                                </li>
+                                <li class="<?php echo (strpos($url, '/Reportes/listar/'))?'active':'';?>">
+                                    <a href="simple.html">
+                                        <i class="fa fa-calendar-o"></i> <span>Reportes</span>
                                     </a>
                                 </li>
 
