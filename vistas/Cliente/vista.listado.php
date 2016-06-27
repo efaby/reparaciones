@@ -1,10 +1,10 @@
-<?php $title = "Listado Usuarios";?>
+<?php $title = "Listado Clientes";?>
 <?php include_once PATH_TEMPLATE.'/header.php';?>
 
 <!-- Main row -->
 <div class="row">
 	<div class="col-lg-12">
-    	<h1 class="page-header">Usuarios</h1>
+    	<h1 class="page-header">Clientes</h1>
    	</div>
 </div>
 <?php if (isset($_SESSION['message'])&& ($_SESSION['message'] != '')):?>
@@ -23,12 +23,11 @@
 	<table class="table table-striped table-bordered table-hover" id="dataTables-example">
     <thead>
 	    <tr>
-	    	<th>Identificación</th>
+	    <th>Identificación</th>
 		    <th>Nombres</th>
 		    <th>Apellidos</th>
 		    <th>Email</th>
-		    <th>Tipo Usuario</th>
-		     <th>Avatar</th>
+		    <th>Teléfono</th>
 		    <th style="text-align: center;">Acciones</th>
 	    </tr>
     </thead>
@@ -38,8 +37,7 @@
     		echo "<td>".$item['nombres']."</td>";
     		echo "<td>".$item['apellidos']."</td>";
     		echo "<td>".$item['email']."</td>";
-    		echo "<td>".$item['tipo_usuario']." </td>";
-    		echo "<td align='center'> <img class='img-circle' alt='User'  height='30px' src='".PATH_IMAGES."/avatar_".$item['genero'].".png'></td>";
+    		echo "<td>".$item['telefono']."</td>";
     		echo "<td align='center'><a href='javascript: loadModal(".$item['id'].")' class='btn btn-warning btn-sm' title='Editar' ><i class='fa fa-pencil'></i></a>
 					  <a href='javascript:if(confirm(\"Está seguro que desea eliminar el elemento seleccionado?\")){redirect(".$item['id'].");}' class='btn btn-danger btn-sm' title='Eliminar'><i class='fa fa-trash'></i></a></td>";
     	}?>
@@ -52,7 +50,7 @@
 		<div class="modal-content">
 			<div class="modal-header">
 				<a class="close" data-dismiss="modal">×</a>
-				<h3>Usuario</h3>
+				<h3>Cliente</h3>
 			</div>
 
 			<div class="modal-body"></div>
@@ -67,9 +65,7 @@
 <script src="<?php echo PATH_JS; ?>/dataTables.bootstrap.min.js"></script>
 <script src="<?php echo PATH_JS; ?>/table.js"></script>
 <script src="<?php echo PATH_JS; ?>/bootstrapValidator.min.js"></script>
-<script src="<?php echo PATH_JS; ?>/listados.js"></script>
 <link href="<?php echo PATH_CSS; ?>/bootstrapValidator.min.css" rel="stylesheet">
-
-
+<script src="<?php echo PATH_JS; ?>/listados.js"></script>
 </body>
 </html>

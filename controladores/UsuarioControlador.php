@@ -32,6 +32,7 @@ class UsuarioControlador {
 		$usuario ['email'] = $_POST ['email'];
 		$usuario ['celular'] = $_POST ['celular'];	
 		$usuario ['usuario'] = $_POST ['usuario'];
+		$usuario ['genero'] = $_POST ['genero'];
 		$model = new UsuarioModelo();
 		try {
 			$datos = $model->guardarUsuario( $usuario );

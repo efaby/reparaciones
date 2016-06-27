@@ -12,7 +12,7 @@ class UsuarioModelo {
 
 	public function obtenerListadoUsuarios(){
 		$model = new BaseModelo();		
-		$sql = "select u.id, u.identificacion, u.nombres, u.apellidos, u.email, t.nombre as tipo_usuario from usuario as u inner join tipo_usuario as t on  u.tipo_usuario_id = t.id where eliminado = 0";		
+		$sql = "select u.id, u.identificacion, u.genero, u.nombres, u.apellidos, u.email, t.nombre as tipo_usuario from usuario as u inner join tipo_usuario as t on  u.tipo_usuario_id = t.id where eliminado = 0";		
 		$result = $model->ejecutarSql($sql);
 		return $model->obtenerCampos($result);
 	}	
@@ -28,7 +28,7 @@ class UsuarioModelo {
 			$resultArray = $resultArray[0];
 				
 		} else {
-			$resultArray = Array ( 'id' => '' ,'identificacion' => '','nombres' => '','apellidos' => '','email' => '','direccion' => '','password' => '', 'tipo_usuario_id' => '0','telefono' => '', 'celular' => '','password1' => '');
+			$resultArray = Array ( 'id' => '' ,'identificacion' => '','nombres' => '','apellidos' => '','email' => '','direccion' => '','password' => '', 'tipo_usuario_id' => '0','telefono' => '', 'celular' => '','password1' => '','usuario' => '','genero' => '');
 		}
 		$resultArray['password'] = $resultArray['password1'] = $this->patron;
 		return $resultArray;
