@@ -7,14 +7,13 @@ require_once(PATH_MODELOS."/BaseModelo.php");
  *
  */
 class ClienteModelo {
-
-
+	
 	public function obtenerListadoClientes(){
 		$model = new BaseModelo();		
 		$sql = "select *  from cliente where eliminado = 0";		
 		$result = $model->ejecutarSql($sql);
 		return $model->obtenerCampos($result);
-	}	
+	}		
 	
 	public function obtenerCliente()
 	{
@@ -29,7 +28,7 @@ class ClienteModelo {
 		} else {
 			$resultArray = Array ( 'id' => '' ,'identificacion' => '','nombres' => '','apellidos' => '','email' => '','direccion' => '','telefono' => '', 'celular' => '');
 		}
-		$resultArray['password'] = $resultArray['password1'] = $this->patron;
+		
 		return $resultArray;
 	}
 	
@@ -45,5 +44,6 @@ class ClienteModelo {
 		$model = new BaseModelo();
 		$result = $model->ejecutarSql($sql);
 	}
+	
 
 }

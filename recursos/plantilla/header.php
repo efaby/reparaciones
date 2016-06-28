@@ -102,14 +102,14 @@
                                     </a>
                                 </li>
 
-                                <li class="<?php echo (strpos($url, '/Resparacion/listar/'))?'active':'';?>">
-                                    <a href="basic_form.html">
+                                <li class="<?php echo (strpos($url, '/Reparacion/listar/'))?'active':'';?>">
+                                    <a href="../../Reparacion/listar/">
                                         <i class="fa fa-list-ul"></i> <span>Reparaciones</span>
                                     </a>
                                 </li>
 
                                 <li class="<?php echo (strpos($url, '/Reparacion/listar/'))?'active':'';?>">
-                                    <a href="simple.html">
+                                    <a href="../../Reparacion/listar/">
                                         <i class="fa fa-wrench"></i> <span>Mis reparaciones</span>
                                     </a>
                                 </li>

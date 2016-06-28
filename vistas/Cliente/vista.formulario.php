@@ -1,4 +1,4 @@
-<form id="frmUsuario" method="post" action="../guardar/">
+<form id="frmUsuario" method="post" action="../../Cliente/guardar/">
 
 	<div class="form-group col-sm-12">
 		<label class="control-label">Número de Identificación</label> <input type='text'
@@ -50,6 +50,7 @@
 	
 	<div class="form-group">
 	<input type='hidden' name='id' class='form-control' value="<?php echo $cliente['id']; ?>">
+	<input type='hidden' name='redireccion' value="<?php echo $cliente_id; ?>">
 		<button type="submit" class="btn btn-success">Guardar</button>
 	</div>
 

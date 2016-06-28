@@ -16,6 +16,7 @@ class ClienteControlador {
 		$model = new ClienteModelo();
 		$cliente = $model->obtenerCliente();
 		$message = "";
+		$cliente_id = $_GET['id'];
 		require_once PATH_VISTAS."/Cliente/vista.formulario.php";
 	}
 	
@@ -28,7 +29,7 @@ class ClienteControlador {
 		$cliente ['telefono'] = $_POST ['telefono'];		
 		$cliente ['email'] = $_POST ['email'];
 		$cliente ['celular'] = $_POST ['celular'];	
-		
+		$redireccion = $_POST ['redireccion'];	
 		$model = new ClienteModelo();
 		try {
 			$datos = $model->guardarCliente( $cliente );
@@ -36,7 +37,12 @@ class ClienteControlador {
 		} catch ( Exception $e ) {
 			$_SESSION ['message'] = $e->getMessage ();
 		}
-		header ( "Location: ../listar/" );
+		if($redireccion==-1){
+			header ( "Location: ../../Reparacion/editar/" );
+		} else {
+			header ( "Location: ../listar/" );
+		}
+		
 	}
 	
 	public function eliminar() {
