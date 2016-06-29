@@ -49,13 +49,12 @@ class ReparacionControlador {
 		
 		$model = new ReparacionModelo();
 		try {
-			$datos = $model->guardarReparacion($objeto);
-		
-			$_SESSION ['message'] = "Datos almacenados correctamente.";
+			$reparacionId = $model->guardarReparacion($objeto);					
 		} catch ( Exception $e ) {
 			$_SESSION ['message'] = $e->getMessage ();
 		}
-		header ( "Location: ../listar/" );
+		echo json_encode($reparacionId);
+		exit();
 	}
 	
 	public function eliminar() {
@@ -69,5 +68,48 @@ class ReparacionControlador {
 		header ( "Location: ../listar/" );
 	}
 	
+	public function imprimir(){
+		$reparacionId = $_GET['id'];
+		$model = new ReparacionModelo();
+		$reparacion = $model->obtenerReparacion($reparacionId);
+		require_once PATH_VISTAS."/Reparacion/vista.imprimir.php";
+	}
+	
+	public function cambioEstado(){
+		$reparacionId = $_GET['id'];
+		$model = new ReparacionModelo();
+		$reparacion = $model->obtenerReparacion($reparacionId);
+		if($reparacion['estado_id']== 1){
+			$estado = 'Diagnostico del Equipo';
+			$estado_id = 2;
+		} else {
+			if($reparacion['estado_id']== 2){
+				$estado = 'Reparación del Equipo';
+				$estado_id = 3;
+			} else {
+				$estado = 'Entrega del Equipo';
+				$estado_id = 4;
+			}
+		}
+		$historial = $model->obtenerHistorial($reparacionId);
+		require_once PATH_VISTAS."/Reparacion/vista.cambioestado.php";
+	}
+	public function guardarCambioEstado(){
+		$reparacion['id'] =$historial['reparacion_id'] = $_POST ['reparacion_id'];
+		$reparacion['estado'] = $historial['estado_id'] = $_POST ['estado_id'];
+		$historial['observaciones'] = $_POST['observaciones'];
+		$historial['activo'] = 1;
+		$historial['fecha_registro'] = date('y-m-d');
+		$historial['id_usuario'] = 1; //Sesion
+		$model = new ReparacionModelo();
+		try {
+			$model->guardarHistorial($historial);	
+			$_SESSION ['message'] = "Datos almacenados correctamente.";
+		} catch ( Exception $e ) {
+			$_SESSION ['message'] = $e->getMessage ();
+		}
+		echo json_encode($reparacion);
+		exit();
+	}
 	
 }

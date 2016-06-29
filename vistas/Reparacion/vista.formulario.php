@@ -40,7 +40,7 @@
 		</div>
 	</div>
 	
-	<form id="frmReparacion" method="post" action="../guardar/">
+	<form id="frmReparacion" method="post" action="">
 	<div class="col-sm-12 panel panel-default" style="margin-left: 15px; width: 98%; padding-right: 15px; display: none; " id="reparacion">
 	<h4>Detalles Equipo a Reparar</h4>
 	<div class="form-group col-sm-6">
@@ -125,6 +125,7 @@
 
 	</div>
 </div>
+
 <?php include_once PATH_TEMPLATE.'/footer.php';?>
 <script src="<?php echo PATH_JS; ?>/bootstrapValidator.min.js"></script>
 <link href="<?php echo PATH_CSS; ?>/bootstrapValidator.min.css" rel="stylesheet">  
@@ -291,10 +292,32 @@ $(document).ready(function() {
 					}
 				}
 			},	
+		},
+		submitHandler: function(validator, form, submitButton) {
+			$.ajax({
+		           type: "POST",
+		           dataType: "json",
+		           url: '../guardar/',
+		           data: $("#frmReparacion").serialize(), 
+		           success: function(data){
+		        	   var posicion_x; 
+		        		var posicion_y; 
+		        		var ancho = 800;
+		        		var alto = 450;
+		        		posicion_x=(screen.width/2)-(ancho/2); 
+		        		posicion_y=(screen.height/2)-(alto/2); 
+		        		var accion = "../imprimir/"+data;
+		        		var opciones="toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=yes,resizable=yes,width="+ancho+",height="+alto+",left="+posicion_x+",top="+posicion_y;
+		        		window.open(accion,"",opciones);
+		           }
+		         });
+	         return false;
 		}
+		
 	});
 
 });
+
 </script>
 <style>
 .col-sm-6, .col-sm-12 {
