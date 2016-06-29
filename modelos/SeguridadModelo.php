@@ -53,6 +53,36 @@ class SeguridadModelo {
 		$result = $model->ejecutarSql($sql);
 	}
 	
+	public function contarClientes(){
+		$sql = "Select count(id) as numero from cliente where eliminado = 0";
+		$model =  new BaseModelo();
+		$result = $model->ejecutarSql($sql);
+		$resultArray = $model->obtenerCampos($result);
+		
+		return (count($resultArray)>0)?$resultArray[0]['numero']:0;
+	}
+	
+	public function contarReparaciones($estado){
+		$sql = "Select count(h.id) as numero from historial as h ";
+		$sql1 = "";
+		if($_SESSION['SESSION_USER']['tipo_usuario_id']==2){
+			$sql .= " inner join reparacion as r on r.id =  h.reparacion_id ";
+			$sql1 = " and r.tecnico_id = ".$_SESSION['SESSION_USER']['id'];
+		}
+		$sql .= "where h.activo = 1".$sql1;
+		if($estado){
+			$sql .= " and h.estado_id = ".$estado;
+		} else {
+			$sql .= " and (h.estado_id = 2 or h.estado_id = 3 )";			
+		}	
+		
+		$model =  new BaseModelo();
+		$result = $model->ejecutarSql($sql);
+		$resultArray = $model->obtenerCampos($result);
+		
+		return (count($resultArray)>0)?$resultArray[0]['numero']:0;
+	}
+	
 	/*	
 	public function getUsersList($offset, $limit){
 		$model = new model();

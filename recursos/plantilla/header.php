@@ -90,35 +90,41 @@
                                         <i class="fa fa-dashboard"></i> <span>Inicio</span>
                                     </a>
                                 </li>
+                                <?php if($_SESSION['SESSION_USER']['tipo_usuario_id']==1):?>
                                 <li class="<?php echo (strpos($url, '/Usuario/listar/'))?'active':'';?>">
                                     <a href="../../Usuario/listar/">
                                         <i class="fa fa-user"></i> <span>Usuarios</span>
                                     </a>
                                 </li>
-                                
+                                <?php endif;?>
+                                <?php if(($_SESSION['SESSION_USER']['tipo_usuario_id']==3)||($_SESSION['SESSION_USER']['tipo_usuario_id']==1)):?>
                                 <li class="<?php echo (strpos($url, '/Cliente/listar/'))?'active':'';?>">
                                     <a href="../../Cliente/listar/">
                                         <i class="fa fa-users"></i> <span>Clientes</span>
                                     </a>
                                 </li>
-
+								<?php endif;?>
+                                <?php if(($_SESSION['SESSION_USER']['tipo_usuario_id']==3)||($_SESSION['SESSION_USER']['tipo_usuario_id']==1)):?>
                                 <li class="<?php echo (strpos($url, '/Reparacion/listar/'))?'active':'';?>">
                                     <a href="../../Reparacion/listar/">
                                         <i class="fa fa-list-ul"></i> <span>Reparaciones</span>
                                     </a>
                                 </li>
-
+								<?php endif;?>
+                                <?php if($_SESSION['SESSION_USER']['tipo_usuario_id']==2):?>
                                 <li class="<?php echo (strpos($url, '/Reparacion/listar/'))?'active':'';?>">
                                     <a href="../../Reparacion/listar/">
                                         <i class="fa fa-wrench"></i> <span>Mis reparaciones</span>
                                     </a>
                                 </li>
+                                <?php endif;?>
+                                <?php if(($_SESSION['SESSION_USER']['tipo_usuario_id']==3)||($_SESSION['SESSION_USER']['tipo_usuario_id']==1)):?>
                                 <li class="<?php echo (strpos($url, '/Reportes/listar/'))?'active':'';?>">
                                     <a href="simple.html">
                                         <i class="fa fa-calendar-o"></i> <span>Reportes</span>
                                     </a>
                                 </li>
-
+								 <?php endif;?>
                             </ul>
                         </section>
                         <!-- /.sidebar -->
