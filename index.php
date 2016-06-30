@@ -8,7 +8,7 @@ if(isset($_GET['action'])){
 	$redirect = ($_GET['action']!='')?$_GET['action']:"listar";
 	$url .= "?action=".$redirect;
 }
-
+ 
 /*
 
 $patron = "web/";

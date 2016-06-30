@@ -99,42 +99,20 @@ class SeguridadControlador {
 		return "";
 	}
 	
-	/*
-	public function welcome(){
-		require_once "view.welcome.php";
-	}
-	
-	
 	public function error403(){
-		require_once PATH_VIEWS."/Secure/view.error403.php";
+		require_once PATH_VISTAS."/Seguridad/vista.error403.php";
 	}
 	
-	
-	
-	public function displayList()
-	{
-		$model = new SecureModel();
-		$offset = 1;
-		if(isset($_POST['listForm_offset'])){
-			$offset = $_POST['listForm_offset'];
-		}
-		$totalItems = $model->getUsersListCount();
-		$paginator = new paginator("listForm", $totalItems, $offset, LIMIT_PAGE);
-		$datos = $model->getUsersList($offset, LIMIT_PAGE);
-		require_once "view.listado.php";
-	}	
-	
-	private function getPrefixUrl(){
-		$url = $_SERVER['REQUEST_URI'];
-		$urlWeb = '';
-		if(strpos($url, "/views/")){
-			$urlWeb = "../../";
-		}
-		return $urlWeb;
+	public function error404(){
+		require_once PATH_VISTAS."/Seguridad/vista.error404.php";
 	}
 	
+	public function error500(){
+		require_once PATH_VISTAS."/Seguridad/vista.error500.php";
+	}
+	
+	/*
 		
-	
 
 	
 	public function recoverPassword(){
