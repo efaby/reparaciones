@@ -12,23 +12,24 @@ class BaseModelo
 
 	private function abrirConexion()
 	{
-		$this->conexion=mysql_connect($this->host,$this->username,$this->password);
-		mysql_set_charset('utf8', $this->conexion);
-		mysql_select_db($this->database,$this->conexion);
+		$this->conexion=mysqli_connect($this->host,$this->username,$this->password,$this->database);
+		mysqli_set_charset($this->conexion,'utf8');
+	//	mysql_select_db(,$this->conexion);
 	}
 
 	private function cerrarConexion()
 	{
-		mysql_close();
+		mysqli_close($this->conexion);
 	}
 
 	public function ejecutarSql($sql,$obtenerId = false)
 	{
 		$this->abrirConexion();
-		$result=mysql_query($sql,$this->conexion);
+		$result=mysqli_query($this->conexion,$sql);
 		
 		if($obtenerId){
-        	$result = mysql_insert_id($this->conexion);
+        	$result = mysqli_insert_id($this->conexion);
+        	
 		}
         $this->cerrarConexion();
 		return $result;
@@ -36,10 +37,13 @@ class BaseModelo
 	
 	public function obtenerCampos($resultado){
 		$resultArray = array();
-		while ($row = mysql_fetch_assoc($resultado))
-		{
-			$resultArray[] = $row;
+		if($resultado !== false){
+			while ($row = mysqli_fetch_assoc($resultado))
+			{
+				$resultArray[] = $row;
+			}
 		}
+		
 		return $resultArray;
 	}
 	
@@ -49,8 +53,9 @@ class BaseModelo
 		return $this->obtenerCampos($result);
 	}
 	
-	public function guardarDatos($objeto,$tabla){
-		$id = $objeto["id"];
+	public function guardarDatos($objeto,$tabla){		
+		
+		$id = isset($objeto["id"])?$objeto["id"]:0;
 		unset($objeto["id"]);		
 		$values = "";
 		$keys = "";

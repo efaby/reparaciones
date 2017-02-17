@@ -33,7 +33,7 @@ class SeguridadModelo {
 		$sql = "select url from acceso where tipo_usuario_id = ".$type;
 		$result = $model->ejecutarSql($sql);
 		$resultArray = array();
-		while ($row = mysql_fetch_assoc($result)){
+		while ($row = mysqli_fetch_assoc($result)){
 			$resultArray[] = $row['path'];
 		}
 		return $resultArray;
@@ -65,7 +65,7 @@ class SeguridadModelo {
 	public function contarReparaciones($estado){
 		$sql = "Select count(h.id) as numero from historial as h ";
 		$sql1 = "";
-		if($_SESSION['SESSION_USER']['tipo_usuario_id']==2){
+		if((isset($_SESSION['SESSION_USER']['tipo_usuario_id']))&&($_SESSION['SESSION_USER']['tipo_usuario_id']==2)){
 			$sql .= " inner join reparacion as r on r.id =  h.reparacion_id ";
 			$sql1 = " and r.tecnico_id = ".$_SESSION['SESSION_USER']['id'];
 		}

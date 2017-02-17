@@ -1,8 +1,10 @@
--- MySQL dump 10.13  Distrib 5.7.9, for linux-glibc2.5 (x86_64)
+CREATE DATABASE  IF NOT EXISTS `reparacion` /*!40100 DEFAULT CHARACTER SET latin1 */;
+USE `reparacion`;
+-- MySQL dump 10.13  Distrib 5.7.17, for Linux (x86_64)
 --
--- Host: localhost    Database: reparaciones
+-- Host: localhost    Database: reparacion
 -- ------------------------------------------------------
--- Server version	5.5.49-0ubuntu0.14.04.1
+-- Server version	5.7.17-0ubuntu0.16.04.1
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -59,7 +61,7 @@ CREATE TABLE `cliente` (
   `email` varchar(128) NOT NULL,
   `eliminado` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -68,7 +70,7 @@ CREATE TABLE `cliente` (
 
 LOCK TABLES `cliente` WRITE;
 /*!40000 ALTER TABLE `cliente` DISABLE KEYS */;
-INSERT INTO `cliente` VALUES (1,'Marthas','Lopez','0603718574','Calle 54','021345122','0241236214','mail45@mail.com',0),(2,'Juan','Perez','0603718575','Calle 5','021345122','0124574417','mailj@mail.com',0),(5,'prueba','Perez','2222222222','prueba','032154322','0215402151','prueba@mail.com',0);
+INSERT INTO `cliente` VALUES (1,'Marthas','Lopez','0603718574','Calle 54','021345122','0241236214','mail45@mail.com',0),(2,'Juan','Perez','0603718575','Calle 5','021345122','0124574417','mailj@mail.com',0),(5,'prueba','Perez','2222222222','prueba','032154322','0215402151','prueba@mail.com',0),(6,'Fabian','Villa','0603718578','calle 2','222222222','3333333333','efaby10@hotmail.com',0);
 /*!40000 ALTER TABLE `cliente` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -87,7 +89,7 @@ CREATE TABLE `equipo` (
   `numero_serie` varchar(64) NOT NULL,
   `observaciones` varchar(2048) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -96,7 +98,7 @@ CREATE TABLE `equipo` (
 
 LOCK TABLES `equipo` WRITE;
 /*!40000 ALTER TABLE `equipo` DISABLE KEYS */;
-INSERT INTO `equipo` VALUES (6,'laptop toshiba','tosihiba','lc-2012','abc-123','deja con cargador'),(7,'laptop toshiba','tosihiba','lc-2012','abc-123','deja con cargador'),(8,'pc de escritoprio','generico','i5','er-213','deja teclado y mouse'),(9,'a','a','a','a','a'),(10,'a','a','a','a','sa'),(11,'a','a','a','a','sa'),(12,'b','b','b','b','b'),(13,'b','b','b','b','b'),(14,'a','a','a','2','a'),(15,'a','a','a','a','a');
+INSERT INTO `equipo` VALUES (6,'laptop toshiba','tosihiba','lc-2012','abc-123','deja con cargador'),(7,'laptop toshiba','tosihiba','lc-2012','abc-123','deja con cargador'),(8,'pc de escritoprio','generico','i5','er-213','deja teclado y mouse'),(9,'a','a','a','a','a'),(10,'a','a','a','a','sa'),(11,'a','a','a','a','sa'),(12,'b','b','b','b','b'),(13,'b','b','b','b','b'),(14,'a','a','a','2','a'),(15,'a','a','a','a','a'),(16,'asas','asas','adsas','asas','asasas'),(17,'asas','asas','adsas','asas','asasas'),(18,'asas','AAA','AA','asas','sdsdsd'),(19,'asas','AAA','AA','asas','sdsdsd');
 /*!40000 ALTER TABLE `equipo` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -145,7 +147,7 @@ CREATE TABLE `historial` (
   KEY `fk_historial_reparacion1_idx` (`reparacion_id`),
   CONSTRAINT `fk_historial_estado1` FOREIGN KEY (`estado_id`) REFERENCES `estado` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_historial_reparacion1` FOREIGN KEY (`reparacion_id`) REFERENCES `reparacion` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -154,7 +156,7 @@ CREATE TABLE `historial` (
 
 LOCK TABLES `historial` WRITE;
 /*!40000 ALTER TABLE `historial` DISABLE KEYS */;
-INSERT INTO `historial` VALUES (1,3,1,1,'2016-06-28','deja con cargador',0),(2,4,1,1,'2016-06-28','se reinica a cada momento',0),(3,5,1,1,'2016-06-29','a',0),(4,6,1,1,'2016-06-29','sa',1),(5,7,1,1,'2016-06-29','sa',0),(6,8,1,1,'2016-06-29','b',1),(7,9,1,1,'2016-06-29','b',1),(8,10,1,1,'2016-06-29','asas',1),(9,11,1,1,'2016-06-29','a',1),(10,3,2,1,'2016-06-29',NULL,0),(11,3,3,1,'2016-06-29','paso otro estado',0),(12,3,4,1,'2016-06-29','entregado',1),(13,4,2,1,'2016-06-29','prueba',0),(14,4,3,1,'2016-06-29','teste',0),(15,4,4,1,'2016-06-29','entrega',1),(16,5,2,1,'2016-06-29','teste teste ',1),(17,7,2,1,'2016-06-29','prueba',1);
+INSERT INTO `historial` VALUES (1,3,1,1,'2016-06-28','deja con cargador',0),(2,4,1,1,'2016-06-28','se reinica a cada momento',0),(3,5,1,1,'2016-06-29','a',0),(4,6,1,1,'2016-06-29','sa',1),(5,7,1,1,'2016-06-29','sa',0),(6,8,1,1,'2016-06-29','b',1),(7,9,1,1,'2016-06-29','b',1),(8,10,1,1,'2016-06-29','asas',1),(9,11,1,1,'2016-06-29','a',1),(10,3,2,1,'2016-06-29',NULL,0),(11,3,3,1,'2016-06-29','paso otro estado',0),(12,3,4,1,'2016-06-29','entregado',1),(13,4,2,1,'2016-06-29','prueba',0),(14,4,3,1,'2016-06-29','teste',0),(15,4,4,1,'2016-06-29','entrega',1),(16,5,2,1,'2016-06-29','teste teste ',1),(17,7,2,1,'2016-06-29','prueba',1),(18,12,1,1,'2017-02-16','asasas',0),(19,13,1,1,'2017-02-16','asasas',1),(20,14,1,1,'2017-02-16','sdsdsd',1),(21,15,1,1,'2017-02-16','sdsdsd',1),(22,12,2,1,'2017-02-16','esta de formatear',0),(23,12,3,1,'2017-02-16','reparado',1);
 /*!40000 ALTER TABLE `historial` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -182,7 +184,7 @@ CREATE TABLE `reparacion` (
   CONSTRAINT `fk_reparacion_cliente1` FOREIGN KEY (`cliente_id`) REFERENCES `cliente` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_reparacion_equipo1` FOREIGN KEY (`equipo_id`) REFERENCES `equipo` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_reparacion_tecnico1` FOREIGN KEY (`tecnico_id`) REFERENCES `usuario` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -191,7 +193,7 @@ CREATE TABLE `reparacion` (
 
 LOCK TABLES `reparacion` WRITE;
 /*!40000 ALTER TABLE `reparacion` DISABLE KEYS */;
-INSERT INTO `reparacion` VALUES (2,5,6,2,1,'2016-06-28','2016-06-28','deja con cargador',0),(3,5,7,2,1,'2016-06-28','2016-06-28','deja con cargador',0),(4,5,8,2,1,'2016-06-28','2016-06-28','se reinica a cada momento',0),(5,5,9,2,1,'2016-06-29','2016-06-29','a',0),(6,5,10,3,1,'2016-06-29','2016-06-29','sa',0),(7,5,11,3,1,'2016-06-29','2016-06-29','sa',0),(8,5,12,3,1,'2016-06-29','2016-06-29','b',0),(9,5,13,3,1,'2016-06-29','2016-06-29','b',0),(10,5,14,2,1,'2016-06-29','2016-06-29','asas',0),(11,5,15,2,1,'2016-06-29','2016-06-29','a',0);
+INSERT INTO `reparacion` VALUES (2,5,6,2,1,'2016-06-28','2016-06-28','deja con cargador',0),(3,5,7,2,1,'2016-06-28','2016-06-28','deja con cargador',0),(4,5,8,2,1,'2016-06-28','2016-06-28','se reinica a cada momento',0),(5,5,9,2,1,'2016-06-29','2016-06-29','a',0),(6,5,10,3,1,'2016-06-29','2016-06-29','sa',0),(7,5,11,3,1,'2016-06-29','2016-06-29','sa',0),(8,5,12,3,1,'2016-06-29','2016-06-29','b',0),(9,5,13,3,1,'2016-06-29','2016-06-29','b',0),(10,5,14,2,1,'2016-06-29','2016-06-29','asas',0),(11,5,15,2,1,'2016-06-29','2016-06-29','a',0),(12,6,16,5,1,'2017-02-16','2017-02-16','asasas',0),(13,6,17,5,1,'2017-02-16','2017-02-16','asasas',0),(14,6,18,5,1,'2017-02-16','2017-02-16','sdsdsd',0),(15,6,19,5,1,'2017-02-16','2017-02-16','sdsdsd',0);
 /*!40000 ALTER TABLE `reparacion` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -239,12 +241,12 @@ CREATE TABLE `usuario` (
   `email` varchar(128) NOT NULL,
   `usuario` varchar(64) NOT NULL,
   `password` varchar(128) NOT NULL,
-  `eliminado` int(11) NOT NULL,
+  `eliminado` int(11) NOT NULL DEFAULT '0',
   `genero` varchar(2) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_tecnico_tipo_usuario_idx` (`tipo_usuario_id`),
   CONSTRAINT `fk_tecnico_tipo_usuario` FOREIGN KEY (`tipo_usuario_id`) REFERENCES `tipo_usuario` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -253,7 +255,7 @@ CREATE TABLE `usuario` (
 
 LOCK TABLES `usuario` WRITE;
 /*!40000 ALTER TABLE `usuario` DISABLE KEYS */;
-INSERT INTO `usuario` VALUES (1,1,'Fabian','Perez','0213451247','calle 3','021547211','0214510213','mail@mail.com','faby','e10adc3949ba59abbe56e057f20f883e',0,'m'),(2,2,'Fernado','Perez','0602154123','Calle 5-6 ya calle 2','014245788','0124574417','mail@mail.com','fercho','e10adc3949ba59abbe56e057f20f883e',0,'m'),(3,2,'maria','alvarez','0603718572','calle 3','014245788','0215402151','mail@mail.com','mary','fcea920f7412b5da7be0cf42b8c93759',0,'f'),(4,3,'Jose','Andrade','0302145620','calle5','021354122','0215423621','mail@mail.com','pepe','e10adc3949ba59abbe56e057f20f883e',0,'m');
+INSERT INTO `usuario` VALUES (1,1,'Fabian','Perez','0213451247','calle 3','021547211','0214510213','mail@mail.com','faby','e10adc3949ba59abbe56e057f20f883e',0,'m'),(2,2,'Fernado','Perez','0602154123','Calle 5-6 ya calle 2','014245788','0124574417','mail@mail.com','fercho','e10adc3949ba59abbe56e057f20f883e',0,'m'),(3,2,'maria','alvarez','0603718572','calle 3','014245788','0215402151','mail@mail.com','mary','fcea920f7412b5da7be0cf42b8c93759',0,'f'),(4,3,'Jose','Andrade','0302145620','calle5','021354122','0215423621','mail1@mail.com','pepe','e10adc3949ba59abbe56e057f20f883e',0,'m'),(5,2,'Fabian','Villa','0603718578','calle 2','222222222','3333333333','mail21@mail.com','efaby','e10adc3949ba59abbe56e057f20f883e',0,'m');
 /*!40000 ALTER TABLE `usuario` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -266,4 +268,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-07-19 15:09:37
+-- Dump completed on 2017-02-17 16:07:38

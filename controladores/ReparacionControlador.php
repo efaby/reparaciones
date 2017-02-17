@@ -72,6 +72,7 @@ class ReparacionControlador {
 		$reparacionId = $_GET['id'];
 		$model = new ReparacionModelo();
 		$reparacion = $model->obtenerReparacion($reparacionId);
+		$title = "Ticket de Reparaci&oacute;n";
 		require_once PATH_VISTAS."/Reparacion/vista.imprimir.php";
 	}
 	

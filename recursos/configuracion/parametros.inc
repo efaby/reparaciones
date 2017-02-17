@@ -1,8 +1,8 @@
 <?php 	
 	define('HOSTNAME_DATABASE', 'localhost');
 	define('USERNAME', 'root');
-	define('PASSWORD', 'sistemas');
-	define('DATABASE', 'reparaciones'); 	 
+	define('PASSWORD', '123456');
+	define('DATABASE', 'reparacion'); 	 
 	define('PATH_MODELOS', PATH_ROOT."/modelos");
 	define('PATH_CONTROLADORES', PATH_ROOT."/controladores");
 	define('PATH_VISTAS', PATH_ROOT."/vistas");

@@ -119,11 +119,11 @@
                                 </li>
                                 <?php endif;?>
                                 <?php if(($_SESSION['SESSION_USER']['tipo_usuario_id']==3)||($_SESSION['SESSION_USER']['tipo_usuario_id']==1)):?>
-                                <li class="<?php echo (strpos($url, '/Reportes/listar/'))?'active':'';?>">
+                                <!--   <li class="<?php echo (strpos($url, '/Reportes/listar/'))?'active':'';?>">
                                     <a href="simple.html">
                                         <i class="fa fa-calendar-o"></i> <span>Reportes</span>
                                     </a>
-                                </li>
+                                </li> -->
 								 <?php endif;?>
                             </ul>
                         </section>
