@@ -81,7 +81,11 @@ class ReparacionModelo {
 		$model = new BaseModelo();
 		$result = $model->ejecutarSql($sql);
 		$resultArray = $model->obtenerCampos($result);
-		return $resultArray[0];
+		$result = null;
+		if(count($resultArray)> 0){
+			$result = $resultArray[0];
+		}
+		return $result;
 	}
 
 	public function obtenerHistorial($reparacionId){

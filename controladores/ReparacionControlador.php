@@ -37,7 +37,7 @@ class ReparacionControlador {
 		$reparacion['cliente_id'] = $_POST['cliente_id'];
 		$reparacion['fecha_ingreso'] = $_POST['fecha'];
 		$reparacion['fecha_registro'] = $historial['fecha_registro'] = date('y-m-d');		
-		$reparacion['id_usuario'] = $historial['id_usuario'] = 1; //Sesion
+		$reparacion['id_usuario'] = $historial['id_usuario'] = $_SESSION['SESSION_USER']['id']; //Sesion
 		$reparacion['observacion'] = $historial['observaciones'] = $_POST['observaciones'];
 		
 		$historial['estado_id'] = 1;
@@ -101,7 +101,7 @@ class ReparacionControlador {
 		$historial['observaciones'] = $_POST['observaciones'];
 		$historial['activo'] = 1;
 		$historial['fecha_registro'] = date('y-m-d');
-		$historial['id_usuario'] = 1; //Sesion
+		$historial['id_usuario'] = $_SESSION['SESSION_USER']['id']; //Sesion
 		$model = new ReparacionModelo();
 		try {
 			$model->guardarHistorial($historial);	

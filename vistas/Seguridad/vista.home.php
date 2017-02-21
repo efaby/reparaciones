@@ -16,7 +16,11 @@
 					</div>
 				</div>
 			</div>
+			 <?php if($_SESSION['SESSION_USER']['tipo_usuario_id']==1):?>
+			<a href="../../Cliente/listar/">
+			<?php else:?>
 			<a href="#">
+			<?php endif;?>
 				<div class="panel-footer">
 					<span class="pull-left">Ver Detalles</span> <span
 						class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -38,7 +42,7 @@
 					</div>
 				</div>
 			</div>
-			<a href="#">
+			<a href="../../Reparacion/listar/">
 				<div class="panel-footer">
 					<span class="pull-left">Ver Detalles</span> <span
 						class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -60,7 +64,7 @@
 					</div>
 				</div>
 			</div>
-			<a href="#">
+			<a href="../../Reparacion/listar/">
 				<div class="panel-footer">
 					<span class="pull-left">Ver Detalles</span> <span
 						class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -82,7 +86,7 @@
 					</div>
 				</div>
 			</div>
-			<a href="#">
+			<a href="../../Reparacion/listar/">
 				<div class="panel-footer">
 					<span class="pull-left">View Details</span> <span
 						class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>

@@ -26,6 +26,7 @@
 	    	<th>Identificación</th>
 		    <th>Nombres</th>
 		    <th>Apellidos</th>
+		    <th>Usuario</th>
 		    <th>Email</th>
 		    <th>Tipo Usuario</th>
 		     <th>Avatar</th>
@@ -37,6 +38,7 @@
     		echo "<tr><td>".$item['identificacion']."</td>";
     		echo "<td>".$item['nombres']."</td>";
     		echo "<td>".$item['apellidos']."</td>";
+    		echo "<td>".$item['usuario']."</td>";
     		echo "<td>".$item['email']."</td>";
     		echo "<td>".$item['tipo_usuario']." </td>";
     		echo "<td align='center'> <img class='img-circle' alt='User'  height='30px' src='".PATH_IMAGES."/avatar_".$item['genero'].".png'></td>";
