@@ -167,6 +167,7 @@ $(document).ready(function() {
 						
 			        } else {
 			        	$("#registro").css("display", "block");
+			        	
 			        }
 		        	
 		        }

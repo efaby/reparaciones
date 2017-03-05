@@ -22,8 +22,8 @@
       <body class="skin-black">
         <!-- header logo: style can be found in header.less -->
         <header class="header">
-            <a href="index.html" class="logo">
-                Mi local
+            <a href="index.html" class="logo" style="background: #fff;">
+               <img src="<?php echo PATH_IMAGES; ?>/logo.png" alt="" class="img-responsive" style="height: 50px; padding-left: 10px;" />
             </a>
             <!-- Header Navbar: style can be found in header.less -->
             <nav class="navbar navbar-static-top" role="navigation">

@@ -25,10 +25,11 @@
 		</div>
 
 		<div class="col-sm-12 rows">
-			<h3><?php echo $title;?></h3>
+		<img src="<?php echo PATH_IMAGES; ?>/logo.png" alt="" class="img-responsive" style="height: 75px" />
+			
 			<table class="table table-th-block table-bordered">				
 				<tbody>
-				<tr><th colspan="2"></th><th width="20%">No. Ticket:</th><th width="20%"><span style="font-size: 20px;"><?php echo 'TR-'.str_pad($reparacion['id'], 4, '0', STR_PAD_LEFT); ?></span></th></tr>
+				<tr><th colspan="2"><h3><?php echo $title;?></h3> </th><th width="20%">No. Ticket:</th><th width="20%"><span style="font-size: 20px;"><?php echo 'TR-'.str_pad($reparacion['id'], 4, '0', STR_PAD_LEFT); ?></span></th></tr>
 				<tr><td width="20%">Cliente:</td><td colspan="3"><?php echo $reparacion['cliente']?></td></tr>				
 				<tr><td>Equipo:</td><td><?php echo $reparacion['nombre']?></td><td>Serie:</td><td><?php echo $reparacion['numero_serie'];?></td></tr>
 				<tr><td>Marca:</td><td><?php echo $reparacion['marca']?></td><td>Modelo:</td><td><?php echo $reparacion['modelo'];?></td></tr>

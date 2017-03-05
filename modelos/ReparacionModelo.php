@@ -34,7 +34,11 @@ class ReparacionModelo {
 			$sql = "select * from cliente where identificacion = ".$cliente;
 			$result = $model->ejecutarSql($sql);
 			$resultArray = $model->obtenerCampos($result);
-			$resultArray = $resultArray[0];
+			
+			if(count($resultArray)>0){				
+				$resultArray = $resultArray[0];
+			}
+			
 	
 		} else {
 			$resultArray = Array ( 'id' => 0);

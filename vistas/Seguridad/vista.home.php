@@ -96,7 +96,11 @@
 		</div>
 	</div>
 </div>
-<div class="row"></div>
+<div class="row">
+<div class=" col-md-12" >
+<img src="<?php echo PATH_IMAGES; ?>/banner2.jpg" alt="" class="img-responsive" style="width: 100%; margin-top: 20px;"  />
+</div>
+</div>
 <?php include_once PATH_TEMPLATE.'/footer.php';?>             
 </body>
 </html>
